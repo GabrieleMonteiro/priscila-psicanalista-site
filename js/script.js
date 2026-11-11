@@ -2,8 +2,9 @@
 const SITE_CONFIG = {
   whatsapp: "5511983122680",
   whatsappMessage: "Olá, gostaria de marcar uma consulta!",
-  instagram: "", // Exemplo: https://www.instagram.com/seuusuario/
-  address: "" // Endereço completo do consultório, para gerar o link do Maps.
+  instagram: "https://www.instagram.com/psique.autoconhecimento?exln=N3JmcGExbGZvZ2Uw", // Exemplo: https://www.instagram.com/seuusuario/
+  address: "Alameda Prof. Lucas Nogueira Garcez, 2630 - Jardim Paulista, Atibaia - SP, 12947-000", // Endereço completo do consultório, para gerar o link do Maps.
+  googleReviewsUrl: "https://share.google/Ed6hcndH3ZEnP3c6x" // Link público do perfil da Priscila no Google Maps, na aba de avaliações.
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,6 +14,20 @@ document.addEventListener("DOMContentLoaded", () => {
     link.href = whatsappUrl;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
+  });
+
+  // Avaliações: direciona ao perfil público do Google quando o link for configurado.
+  document.querySelectorAll("[data-google-reviews]").forEach(link => {
+    if (SITE_CONFIG.googleReviewsUrl.trim()) {
+      link.href = SITE_CONFIG.googleReviewsUrl;
+    } else {
+      link.href = "#avaliacoes";
+      link.removeAttribute("target");
+      link.addEventListener("click", event => {
+        event.preventDefault();
+        alert("Adicione o link público das avaliações do Google no arquivo js/script.js.");
+      });
+    }
   });
 
   // Instagram: o link só fica ativo depois de preencher o endereço do perfil.
@@ -120,6 +135,34 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     revealItems.forEach(item => item.classList.add("is-visible"));
   }
+
+  // Logo: coloque o arquivo logo-priscila.png na pasta assets.
+  document.querySelectorAll(".brand-logo").forEach(mark => {
+    const logo = mark.querySelector(".logo-image");
+    const fallback = mark.querySelector(".logo-fallback");
+    if (!logo) return;
+    logo.addEventListener("load", () => {
+      logo.hidden = false;
+      if (fallback) fallback.hidden = true;
+    });
+    logo.addEventListener("error", () => {
+      logo.hidden = true;
+      if (fallback) fallback.hidden = false;
+    });
+    if (logo.complete && logo.naturalWidth > 0) {
+      logo.hidden = false;
+      if (fallback) fallback.hidden = true;
+    }
+  });
+
+  // Voltar ao início real da página, acima do cabeçalho fixo.
+  document.querySelectorAll("[data-back-top]").forEach(link => {
+    link.addEventListener("click", event => {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      history.replaceState(null, "", "#topo");
+    });
+  });
 
   // Ano automático no rodapé.
   const year = document.querySelector("[data-year]");
