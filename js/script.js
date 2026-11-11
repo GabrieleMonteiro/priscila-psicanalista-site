@@ -14,6 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
     link.href = whatsappUrl;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
+    // Link das avaliações do Google
+document.querySelectorAll("[data-google-reviews]").forEach(link => {
+  if (SITE_CONFIG.googleReviewsUrl) {
+    link.href = SITE_CONFIG.googleReviewsUrl;
+  }
+});
   });
 
   // Avaliações: direciona ao perfil público do Google quando o link for configurado.
