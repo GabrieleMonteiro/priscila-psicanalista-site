@@ -1,0 +1,30 @@
+[33m280e13b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m refs/heads/main@{Wed Nov 11 21:38:54 2026}: merge origin/main: Fast-forward
+[33m280e13b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{Wed Nov 11 21:38:54 2026}: merge origin/main: Fast-forward
+[33me19789a[m refs/heads/main@{Wed Nov 11 21:35:57 2026}: reset: moving to HEAD~1
+[33me19789a[m HEAD@{Wed Nov 11 21:35:57 2026}: reset: moving to HEAD~1
+[33m280e13b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{Wed Nov 11 21:33:55 2026}: checkout: moving from main to main
+[33m280e13b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{Wed Nov 11 21:29:28 2026}: checkout: moving from main to main
+[33m280e13b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m refs/remotes/origin/main@{Wed Nov 11 21:20:09 2026}: update by push
+[33m280e13b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m refs/heads/main@{Wed Nov 11 21:19:57 2026}: commit: adaptações
+[33m280e13b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{Wed Nov 11 21:19:57 2026}: commit: adaptações
+[33me19789a[m refs/remotes/origin/main@{Wed Nov 11 21:10:10 2026}: update by push
+[33me19789a[m refs/heads/main@{Wed Nov 11 21:10:02 2026}: commit: adaptações
+[33me19789a[m HEAD@{Wed Nov 11 21:10:02 2026}: commit: adaptações
+[33m3666515[m refs/remotes/origin/main@{Wed Nov 11 20:59:46 2026}: update by push
+[33m3666515[m refs/heads/main@{Wed Nov 11 20:59:40 2026}: commit: adaptações
+[33m3666515[m HEAD@{Wed Nov 11 20:59:40 2026}: commit: adaptações
+[33ma8c0885[m refs/remotes/origin/main@{Wed Nov 11 20:35:45 2026}: update by push
+[33ma8c0885[m refs/heads/main@{Wed Nov 11 20:35:36 2026}: commit: adaptações
+[33ma8c0885[m HEAD@{Wed Nov 11 20:35:36 2026}: commit: adaptações
+[33m6801aff[m refs/remotes/origin/main@{Wed Nov 11 20:24:29 2026}: update by push
+[33m6801aff[m refs/heads/main@{Wed Nov 11 20:24:22 2026}: commit: adaptações
+[33m6801aff[m HEAD@{Wed Nov 11 20:24:22 2026}: commit: adaptações
+[33m4945246[m refs/remotes/origin/main@{Tue Nov 10 21:02:34 2026}: update by push
+[33m4945246[m refs/heads/main@{Tue Nov 10 21:02:26 2026}: commit: primeiro layout
+[33m4945246[m HEAD@{Tue Nov 10 21:02:26 2026}: commit: primeiro layout
+[33m30cf960[m refs/remotes/origin/main@{Tue Nov 10 20:42:57 2026}: update by push
+[33m30cf960[m refs/heads/main@{Tue Nov 10 20:42:30 2026}: commit: estrutura inicial do projeto
+[33m30cf960[m HEAD@{Tue Nov 10 20:42:30 2026}: commit: estrutura inicial do projeto
+[33me4e8755[m refs/heads/main@{Tue Nov 10 20:35:54 2026}: clone: from https://github.com/GabrieleMonteiro/priscila-psicanalista-site.git
+[33me4e8755[m refs/remotes/origin/HEAD@{Tue Nov 10 20:35:54 2026}: clone: from https://github.com/GabrieleMonteiro/priscila-psicanalista-site.git
+[33me4e8755[m HEAD@{Tue Nov 10 20:35:54 2026}: clone: from https://github.com/GabrieleMonteiro/priscila-psicanalista-site.git
