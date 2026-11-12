@@ -327,6 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Atualiza os textos e atributos.
   const translatePage = language => {
 
+    document.documentElement.lang = language === "en" ? "en" : "pt-BR";
     currentLanguage = language;
 
     const dictionary = translations[language] || {};
@@ -351,6 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         node.textContent = originalText;
       }
+
 
     });
 

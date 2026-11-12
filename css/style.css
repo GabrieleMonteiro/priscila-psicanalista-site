@@ -808,3 +808,7 @@ body[data-theme="dark"] .skip-link {
     width: calc(100% - 36px);
   }
 }
+html[lang="en"] .hero-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+}
