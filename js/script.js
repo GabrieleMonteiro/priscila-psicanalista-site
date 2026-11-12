@@ -1,4 +1,3 @@
-
 // =========================================
 // CONFIGURAÇÕES DO SITE
 // =========================================
@@ -26,9 +25,7 @@ const SITE_CONFIG = {
 // =========================================
 
 const translations = {
-
   en: {
-
     // Acessibilidade e navegação
     "Pular para o conteúdo": "Skip to content",
     "Priscila, página inicial": "Priscila, home page",
@@ -200,29 +197,19 @@ const translations = {
     "Vamos conversar?": "Shall we talk?",
     "WhatsApp": "WhatsApp",
     "Instagram": "Instagram",
-    "Todos os direitos reservados.": "All rights reserved.",
     "Voltar ao início": "Back to top",
     "Site desenvolvido por Gabriele R. Monteiro.": "Website developed by Gabriele R. Monteiro.",
     "As informações deste site são institucionais e não substituem uma avaliação profissional individual.": "The information on this website is for general purposes and does not replace an individual professional assessment.",
 
     // Outros
     "Change language": "Change language",
-    "Ativar modo escuro": "Enable dark mode",
-    "Ativar modo claro": "Enable light mode",
-
     "psicanalista": "PSYCHOANALYST",
-
-"Cada processo tem seu próprio tempo.": "Every process has its own time.",
-
-"Envie uma mensagem para iniciar a conversa.": "Send a message to start the conversation.",
-
-"© 2026 Priscila Monteiro. Todos os direitos reservados.": "© 2026 Priscila Monteiro. All rights reserved.",
-
-"Voltar ao início ↑": "Back to top ↑"
-
-
+    "Cada processo tem seu próprio tempo.": "Every process has its own time.",
+    "Envie uma mensagem para iniciar a conversa.": "Send a message to start the conversation.",
+    "Voltar ao início ↑": "Back to top ↑",
+    "PSICANALISTA": "PSYCHOANALYST",
+    "Priscila Monteiro. Todos os direitos reservados.": "Priscila Monteiro. All rights reserved."
   }
-
 };
 
 
@@ -292,9 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "Slide anterior": "Previous slide",
       "Próximo slide": "Next slide",
       "Fale com Priscila pelo WhatsApp": "Contact Priscila via WhatsApp",
-      "Change language": "Change language",
-      "Ativar modo escuro": "Enable dark mode",
-      "Ativar modo claro": "Enable light mode"
+      "Change language": "Change language"
     },
 
     "alt": {
@@ -324,15 +309,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const normalizeText = text => text.trim().replace(/\s+/g, " ");
 
-  // Atualiza os textos e atributos.
+
+  // =========================================
+  // WHATSAPP
+  // =========================================
+
+  const updateWhatsAppLinks = () => {
+
+    const message = SITE_CONFIG.whatsappMessage[currentLanguage];
+
+    const whatsappUrl =
+      `https://wa.me/${SITE_CONFIG.whatsapp}?text=${encodeURIComponent(message)}`;
+
+    document.querySelectorAll("[data-whatsapp]").forEach(link => {
+      link.href = whatsappUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    });
+
+  };
+
+
+  // =========================================
+  // ATUALIZAÇÃO DO IDIOMA
+  // =========================================
+
   const translatePage = language => {
 
-    document.documentElement.lang = language === "en" ? "en" : "pt-BR";
     currentLanguage = language;
+
+    document.documentElement.lang =
+      language === "en" ? "en" : "pt-BR";
 
     const dictionary = translations[language] || {};
 
-    // Textos do site.
+    // Traduz os textos sem remover elementos HTML.
     originalTextNodes.forEach((originalText, node) => {
 
       const key = normalizeText(originalText);
@@ -345,18 +356,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const translated = dictionary[key];
 
       if (translated) {
+
         const leadingSpace = originalText.match(/^\s*/)?.[0] || "";
         const trailingSpace = originalText.match(/\s*$/)?.[0] || "";
 
         node.textContent = leadingSpace + translated + trailingSpace;
-      } else {
-        node.textContent = originalText;
-      }
 
+      } else {
+
+        node.textContent = originalText;
+
+      }
 
     });
 
-    // Atributos de acessibilidade.
+    // Traduz atributos de acessibilidade.
     originalAttributes.forEach((attributes, element) => {
 
       Object.entries(attributes).forEach(([attribute, originalValue]) => {
@@ -376,10 +390,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
     });
-
-    // Idioma do documento.
-    document.documentElement.lang =
-      language === "en" ? "en" : "pt-BR";
 
     // Título e descrição da página.
     document.title = language === "en"
@@ -425,8 +435,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    // Botão do modo escuro.
-    updateThemeButton();
+    // Atualiza os links do WhatsApp com a mensagem no idioma escolhido.
+    updateWhatsAppLinks();
 
     // Guarda o idioma escolhido.
     localStorage.setItem("site-language", language);
@@ -450,26 +460,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   }
-
-
-  // =========================================
-  // WHATSAPP
-  // =========================================
-
-  const updateWhatsAppLinks = () => {
-
-    const message = SITE_CONFIG.whatsappMessage[currentLanguage];
-
-    const whatsappUrl =
-      `https://wa.me/${SITE_CONFIG.whatsapp}?text=${encodeURIComponent(message)}`;
-
-    document.querySelectorAll("[data-whatsapp]").forEach(link => {
-      link.href = whatsappUrl;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-    });
-
-  };
 
 
   // =========================================
@@ -642,80 +632,181 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================================
-  // NAVEGAÇÃO POR SEÇÕES
-  // =========================================
+// MENU PERSONALIZADO DE NAVEGAÇÃO
+// =========================================
 
-  const sectionSelect = document.querySelector("#section-select");
+const customSelect = document.querySelector("#section-navigation");
 
-  if (sectionSelect) {
+if (customSelect) {
 
-    sectionSelect.addEventListener("change", () => {
+  const trigger = customSelect.querySelector(".custom-select-trigger");
+  const optionsContainer = customSelect.querySelector(".custom-select-options");
+  const options = [...customSelect.querySelectorAll("[data-section]")];
 
-      const target = sectionSelect.value;
+  let closeTimer;
 
-      if (target) {
+  // Abre o menu
+  const openMenu = (focusFirst = false) => {
 
-        document.querySelector(target)?.scrollIntoView({
+    clearTimeout(closeTimer);
+
+    optionsContainer.hidden = false;
+
+    requestAnimationFrame(() => {
+      customSelect.classList.add("is-open");
+    });
+
+    trigger.setAttribute("aria-expanded", "true");
+
+    if (focusFirst) {
+      options[0]?.focus();
+    }
+
+  };
+
+  // Fecha o menu
+  const closeMenu = (returnFocus = false) => {
+
+    customSelect.classList.remove("is-open");
+
+    trigger.setAttribute("aria-expanded", "false");
+
+    closeTimer = setTimeout(() => {
+      optionsContainer.hidden = true;
+    }, 220);
+
+    if (returnFocus) {
+      trigger.focus();
+    }
+
+  };
+
+  // Alterna abertura e fechamento
+  trigger.addEventListener("click", () => {
+
+    const isOpen = customSelect.classList.contains("is-open");
+
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+
+  });
+
+  // Navegação pelas opções
+  options.forEach((option, index) => {
+
+    option.addEventListener("click", () => {
+
+      const target = option.dataset.section;
+
+      // Atualiza a opção selecionada
+      options.forEach(item => {
+
+        item.classList.remove("is-selected");
+        item.setAttribute("aria-selected", "false");
+
+      });
+
+      option.classList.add("is-selected");
+      option.setAttribute("aria-selected", "true");
+
+      // Fecha o menu
+      closeMenu();
+
+      // Fecha o menu principal em telas menores
+      if (mainNav && menuToggle) {
+
+        mainNav.classList.remove("is-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+
+        menuToggle.setAttribute(
+          "aria-label",
+          currentLanguage === "en" ? "Open menu" : "Abrir menu"
+        );
+
+      }
+
+      // Navega até a seção escolhida
+      const destination = document.querySelector(target);
+
+      if (destination) {
+
+        destination.scrollIntoView({
           behavior: "smooth",
           block: "start"
         });
-
-        sectionSelect.value = "";
 
       }
 
     });
 
-  }
+    // Navegação com teclado
+    option.addEventListener("keydown", event => {
 
+      let nextIndex = index;
 
-  // =========================================
-  // MODO ESCURO
-  // =========================================
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        nextIndex = (index + 1) % options.length;
+      }
 
-  const themeToggle = document.querySelector("#theme-toggle");
+      else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        nextIndex = (index - 1 + options.length) % options.length;
+      }
 
-  const savedTheme = localStorage.getItem("site-theme") || "light";
+      else if (event.key === "Home") {
+        event.preventDefault();
+        nextIndex = 0;
+      }
 
-  document.body.dataset.theme = savedTheme;
+      else if (event.key === "End") {
+        event.preventDefault();
+        nextIndex = options.length - 1;
+      }
 
-  function updateThemeButton() {
-
-    if (!themeToggle) return;
-
-    const darkMode = document.body.dataset.theme === "dark";
-
-    themeToggle.innerHTML = darkMode
-      ? '<span aria-hidden="true">☀</span>'
-      : '<span aria-hidden="true">☾</span>';
-
-    themeToggle.setAttribute(
-      "aria-label",
-      darkMode
-        ? (currentLanguage === "en" ? "Enable light mode" : "Ativar modo claro")
-        : (currentLanguage === "en" ? "Enable dark mode" : "Ativar modo escuro")
-    );
-
-  }
-
-  updateThemeButton();
-
-  if (themeToggle) {
-
-    themeToggle.addEventListener("click", () => {
-
-      const nextTheme =
-        document.body.dataset.theme === "dark" ? "light" : "dark";
-
-      document.body.dataset.theme = nextTheme;
-
-      localStorage.setItem("site-theme", nextTheme);
-
-      updateThemeButton();
+      if (nextIndex !== index) {
+        options[nextIndex].focus();
+      }
 
     });
 
-  }
+  });
+
+  // Teclado no botão principal
+  trigger.addEventListener("keydown", event => {
+
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      openMenu(true);
+    }
+
+  });
+
+  // Fecha com ESC
+  customSelect.addEventListener("keydown", event => {
+
+    if (event.key === "Escape") {
+
+      event.preventDefault();
+      closeMenu(true);
+
+    }
+
+  });
+
+  // Fecha quando clicar fora
+  document.addEventListener("click", event => {
+
+    if (!customSelect.contains(event.target)) {
+      closeMenu();
+    }
+
+  });
+
+}
 
 
   // =========================================
@@ -884,6 +975,5 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================
 
   translatePage(currentLanguage);
-  updateWhatsAppLinks();
 
 });
