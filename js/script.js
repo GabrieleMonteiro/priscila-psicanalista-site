@@ -2,9 +2,9 @@
 const SITE_CONFIG = {
   whatsapp: "5511983122680",
   whatsappMessage: "Olá, gostaria de marcar uma consulta!",
-  instagram: "", // Exemplo: https://www.instagram.com/seuusuario/
-  address: "", // Endereço completo do consultório, para gerar o link do Maps.
-  googleReviewsUrl: "" // Link público do perfil da Priscila no Google Maps, na aba de avaliações.
+  instagram: "https://www.instagram.com/psique.autoconhecimento?exln=N3JmcGExbGZvZ2Uw",
+  address: "Alameda Prof. Lucas Nogueira Garcez, 2630 - Jardim Paulista, Atibaia - SP, 12947-000",
+  googleReviewsUrl: "https://share.google/Ed6hcndH3ZEnP3c6x"
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -16,17 +16,16 @@ document.addEventListener("DOMContentLoaded", () => {
     link.rel = "noopener noreferrer";
   });
 
-  // Avaliações: direciona ao perfil público do Google quando o link for configurado.
+
+  // Avaliações do Google: abre o perfil público informado nas configurações.
   document.querySelectorAll("[data-google-reviews]").forEach(link => {
-    if (SITE_CONFIG.googleReviewsUrl.trim()) {
+    if (SITE_CONFIG.googleReviewsUrl && SITE_CONFIG.googleReviewsUrl.trim()) {
       link.href = SITE_CONFIG.googleReviewsUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
     } else {
       link.href = "#avaliacoes";
       link.removeAttribute("target");
-      link.addEventListener("click", event => {
-        event.preventDefault();
-        alert("Adicione o link público das avaliações do Google no arquivo js/script.js.");
-      });
     }
   });
 
