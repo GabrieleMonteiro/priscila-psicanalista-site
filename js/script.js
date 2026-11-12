@@ -208,7 +208,19 @@ const translations = {
     // Outros
     "Change language": "Change language",
     "Ativar modo escuro": "Enable dark mode",
-    "Ativar modo claro": "Enable light mode"
+    "Ativar modo claro": "Enable light mode",
+
+    "psicanalista": "PSYCHOANALYST",
+
+"Cada processo tem seu próprio tempo.": "Every process has its own time.",
+
+"Envie uma mensagem para iniciar a conversa.": "Send a message to start the conversation.",
+
+"© 2026 Priscila Monteiro. Todos os direitos reservados.": "© 2026 Priscila Monteiro. All rights reserved.",
+
+"Voltar ao início ↑": "Back to top ↑"
+
+
   }
 
 };
