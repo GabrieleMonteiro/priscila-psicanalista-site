@@ -22,7 +22,7 @@
           <span class="logo-fallback">P.</span>
           <img class="logo-image" src="img/logo-priscila.png" alt="Logo de Priscila" hidden>
         </span>
-        <span class="brand-name">Priscila <small>PSICANÁLISE</small></span>
+        <span class="brand-name">Priscila Monteiro <small>PSICANALISTA</small></span>
       </a>
 
       <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav">
@@ -35,6 +35,28 @@
         <a href="#especialidade">A psicanálise</a>
         <a href="#atendimento">Atendimento</a>
         <a class="nav-cta" href="#" data-whatsapp>Agendar conversa <span aria-hidden="true">↗</span></a>
+        <div class="header-tools">
+  <label class="visually-hidden" for="section-select">Navegar pelas seções</label>
+  <select id="section-select" aria-label="Navegar pelas seções">
+    <option value="">Navegar pela página</option>
+    <option value="#inicio">Início</option>
+    <option value="#sobre">Sobre mim</option>
+    <option value="#especialidade">A psicanálise</option>
+    <option value="#como-funciona">Como funciona</option>
+    <option value="#prioridade">Você também merece ser prioridade</option>
+    <option value="#avaliacoes">Avaliações</option>
+    <option value="#atendimento">Atendimento</option>
+    <option value="#localizacao">Localização</option>
+  </select>
+
+  <button class="utility-button" id="language-toggle" type="button" aria-label="Change language">
+    EN
+  </button>
+
+  <button class="utility-button theme-toggle" id="theme-toggle" type="button" aria-label="Ativar modo escuro">
+    <span aria-hidden="true">☾</span>
+  </button>
+</div>
       </nav>
     </div>
   </header>
@@ -187,14 +209,14 @@
             <span>02</span><div><h3>Combine seu horário</h3><p>Vocês conversam sobre disponibilidade, formato do atendimento e os detalhes necessários para o encontro.</p></div>
           </article>
           <article class="consultation-step reveal">
-            <span>03</span><div><h3>Chegue como você está</h3><p>No horário marcado, você participa da sessão presencialmente ou acessa a videochamada. É um espaço de fala e escuta, respeitando seu tempo e sua história.</p></div>
+            <span>03</span><div><h3>Nossa sessão</h3><p>No horário marcado, você participa da sessão presencialmente ou acessa a videochamada. É um espaço de fala e escuta, respeitando seu tempo e sua história.</p></div>
           </article>
         </div>
         <div class="how-cta reveal"><a class="button button-primary" href="#" data-whatsapp>Conversar sobre um atendimento <span>↗</span></a></div>
       </div>
     </section>
 
-    <section class="reasons section-pad">
+  <section class="reasons section-pad" id="prioridade">
       <div class="container">
         <div class="section-heading centered reveal">
           <span class="eyebrow">Cuidar de si é importante</span>
@@ -234,12 +256,18 @@
             <span class="google-g">G</span><span>Google</span>
           </div>
           <div class="reviews-content">
-            <div class="reviews-platform-label">PERFIL NO GOOGLE MAPS</div>
-            <h3>As avaliações de quem já conhece meu trabalho.</h3>
-            <p>As opiniões são publicadas diretamente no Google. Você pode conferir os comentários e avaliações no perfil profissional.</p>
-            <a class="button button-primary" href="#" data-google-reviews target="_blank" rel="noopener">Ver avaliações no Google <span>↗</span></a>
-          </div>
-          <div class="reviews-side-note"><span>“</span><p>Cada experiência é única. Obrigada a todos que compartilham a sua.</p></div>
+  <div class="reviews-platform-label">PERFIL NO GOOGLE MAPS</div>
+  <h3>As avaliações de quem já conhece meu trabalho.</h3>
+  <p>As opiniões são publicadas diretamente no Google. Você pode conferir os comentários e avaliações no perfil profissional.</p>
+
+  <div class="google-reviews-embed" id="google-reviews-embed">
+    <p>Confira as avaliações no perfil profissional do Google.</p>
+  </div>
+
+  <a class="button button-primary" href="#" data-google-reviews target="_blank" rel="noopener">
+    Ver avaliações no Google <span>↗</span>
+  </a>
+</div>
         </div>
         <p class="reviews-note">As avaliações e os comentários são publicados por usuários diretamente no Google.</p>
       </div>
@@ -287,13 +315,17 @@
   <footer class="site-footer">
     <div class="container footer-main">
       <div class="footer-brand">
-        <a class="brand brand-footer" href="#inicio"><span class="brand-mark brand-logo" aria-label="Espaço para a logo da Priscila"><span class="logo-fallback">P.</span><img class="logo-image" src="img/logo-priscila.png" alt="Logo de Priscila" hidden></span><span class="brand-name">Priscila <small>PSICANÁLISE</small></span></a>
+        <a class="brand brand-footer" href="#inicio"><span class="brand-mark brand-logo" aria-label="Espaço para a logo da Priscila"><span class="logo-fallback">P.</span><img class="logo-image" src="img/logo-priscila.png" alt="Logo de Priscila" hidden></span><span class="brand-name">Priscila Monteiro <small>PSICANALISTA</small></span></a>
         <p>Um espaço de escuta, acolhimento e cuidado com a sua história.</p>
       </div>
       <div class="footer-links"><strong>Explore</strong><a href="#sobre">Sobre mim</a><a href="#especialidade">A psicanálise</a><a href="#como-funciona">Como funciona</a><a href="#avaliacoes">Avaliações</a><a href="#atendimento">Atendimento</a><a href="#localizacao">Localização</a></div>
       <div class="footer-contact"><strong>Vamos conversar?</strong><a href="#" data-whatsapp>WhatsApp ↗</a><a href="#" data-instagram target="_blank" rel="noopener">Instagram ↗</a></div>
     </div>
-    <div class="container footer-bottom"><span>© <span data-year></span> Priscila. Todos os direitos reservados.</span><a href="#topo" data-back-top>Voltar ao início ↑</a></div>
+<div class="container footer-bottom">
+  <span>© <span data-year></span> Priscila Monteiro. Todos os direitos reservados.</span>
+  <a href="#topo" data-back-top>Voltar ao início ↑</a>
+</div>
+<p class="site-author">Site desenvolvido por Gabriele R. Monteiro.</p>
     <p class="professional-note">As informações deste site são institucionais e não substituem uma avaliação profissional individual.</p>
   </footer>
 
