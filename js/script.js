@@ -1,3 +1,4 @@
+
 // =========================================
 // CONFIGURAÇÕES DO SITE
 // =========================================
@@ -536,8 +537,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // GOOGLE MAPS
   // =========================================
 
+  // Pesquisa pelo nome profissional junto com o endereço.
+  const mapsSearch = `Psicanalista Priscila Monteiro, ${SITE_CONFIG.address}`;
+
   const mapsUrl = SITE_CONFIG.address.trim()
-    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE_CONFIG.address)}`
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsSearch)}`
     : "";
 
   document.querySelectorAll("[data-maps]").forEach(link => {
@@ -570,11 +574,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const mapFrame = document.createElement("iframe");
 
     mapFrame.src =
-      `https://www.google.com/maps?q=${encodeURIComponent(SITE_CONFIG.address)}&output=embed`;
+      `https://www.google.com/maps?q=${encodeURIComponent(mapsSearch)}&output=embed`;
 
     mapFrame.title = currentLanguage === "en"
-      ? `Location map: ${SITE_CONFIG.address}`
-      : `Mapa de localização: ${SITE_CONFIG.address}`;
+      ? "Location map: Priscila Monteiro"
+      : "Mapa de localização: Priscila Monteiro";
 
     mapFrame.loading = "lazy";
     mapFrame.referrerPolicy = "no-referrer-when-downgrade";
@@ -632,181 +636,181 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================================
-// MENU PERSONALIZADO DE NAVEGAÇÃO
-// =========================================
+  // MENU PERSONALIZADO DE NAVEGAÇÃO
+  // =========================================
 
-const customSelect = document.querySelector("#section-navigation");
+  const customSelect = document.querySelector("#section-navigation");
 
-if (customSelect) {
+  if (customSelect) {
 
-  const trigger = customSelect.querySelector(".custom-select-trigger");
-  const optionsContainer = customSelect.querySelector(".custom-select-options");
-  const options = [...customSelect.querySelectorAll("[data-section]")];
+    const trigger = customSelect.querySelector(".custom-select-trigger");
+    const optionsContainer = customSelect.querySelector(".custom-select-options");
+    const options = [...customSelect.querySelectorAll("[data-section]")];
 
-  let closeTimer;
+    let closeTimer;
 
-  // Abre o menu
-  const openMenu = (focusFirst = false) => {
+    // Abre o menu
+    const openMenu = (focusFirst = false) => {
 
-    clearTimeout(closeTimer);
+      clearTimeout(closeTimer);
 
-    optionsContainer.hidden = false;
+      optionsContainer.hidden = false;
 
-    requestAnimationFrame(() => {
-      customSelect.classList.add("is-open");
+      requestAnimationFrame(() => {
+        customSelect.classList.add("is-open");
+      });
+
+      trigger.setAttribute("aria-expanded", "true");
+
+      if (focusFirst) {
+        options[0]?.focus();
+      }
+
+    };
+
+    // Fecha o menu
+    const closeMenu = (returnFocus = false) => {
+
+      customSelect.classList.remove("is-open");
+
+      trigger.setAttribute("aria-expanded", "false");
+
+      closeTimer = setTimeout(() => {
+        optionsContainer.hidden = true;
+      }, 220);
+
+      if (returnFocus) {
+        trigger.focus();
+      }
+
+    };
+
+    // Alterna abertura e fechamento
+    trigger.addEventListener("click", () => {
+
+      const isOpen = customSelect.classList.contains("is-open");
+
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+
     });
 
-    trigger.setAttribute("aria-expanded", "true");
+    // Navegação pelas opções
+    options.forEach((option, index) => {
 
-    if (focusFirst) {
-      options[0]?.focus();
-    }
+      option.addEventListener("click", () => {
 
-  };
+        const target = option.dataset.section;
 
-  // Fecha o menu
-  const closeMenu = (returnFocus = false) => {
+        // Atualiza a opção selecionada
+        options.forEach(item => {
 
-    customSelect.classList.remove("is-open");
+          item.classList.remove("is-selected");
+          item.setAttribute("aria-selected", "false");
 
-    trigger.setAttribute("aria-expanded", "false");
+        });
 
-    closeTimer = setTimeout(() => {
-      optionsContainer.hidden = true;
-    }, 220);
+        option.classList.add("is-selected");
+        option.setAttribute("aria-selected", "true");
 
-    if (returnFocus) {
-      trigger.focus();
-    }
+        // Fecha o menu
+        closeMenu();
 
-  };
+        // Fecha o menu principal em telas menores
+        if (mainNav && menuToggle) {
 
-  // Alterna abertura e fechamento
-  trigger.addEventListener("click", () => {
+          mainNav.classList.remove("is-open");
+          menuToggle.setAttribute("aria-expanded", "false");
 
-    const isOpen = customSelect.classList.contains("is-open");
+          menuToggle.setAttribute(
+            "aria-label",
+            currentLanguage === "en" ? "Open menu" : "Abrir menu"
+          );
 
-    if (isOpen) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
+        }
 
-  });
+        // Navega até a seção escolhida
+        const destination = document.querySelector(target);
 
-  // Navegação pelas opções
-  options.forEach((option, index) => {
+        if (destination) {
 
-    option.addEventListener("click", () => {
+          destination.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
 
-      const target = option.dataset.section;
-
-      // Atualiza a opção selecionada
-      options.forEach(item => {
-
-        item.classList.remove("is-selected");
-        item.setAttribute("aria-selected", "false");
+        }
 
       });
 
-      option.classList.add("is-selected");
-      option.setAttribute("aria-selected", "true");
+      // Navegação com teclado
+      option.addEventListener("keydown", event => {
 
-      // Fecha o menu
-      closeMenu();
+        let nextIndex = index;
 
-      // Fecha o menu principal em telas menores
-      if (mainNav && menuToggle) {
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          nextIndex = (index + 1) % options.length;
+        }
 
-        mainNav.classList.remove("is-open");
-        menuToggle.setAttribute("aria-expanded", "false");
+        else if (event.key === "ArrowUp") {
+          event.preventDefault();
+          nextIndex = (index - 1 + options.length) % options.length;
+        }
 
-        menuToggle.setAttribute(
-          "aria-label",
-          currentLanguage === "en" ? "Open menu" : "Abrir menu"
-        );
+        else if (event.key === "Home") {
+          event.preventDefault();
+          nextIndex = 0;
+        }
 
-      }
+        else if (event.key === "End") {
+          event.preventDefault();
+          nextIndex = options.length - 1;
+        }
 
-      // Navega até a seção escolhida
-      const destination = document.querySelector(target);
+        if (nextIndex !== index) {
+          options[nextIndex].focus();
+        }
 
-      if (destination) {
-
-        destination.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      }
+      });
 
     });
 
-    // Navegação com teclado
-    option.addEventListener("keydown", event => {
-
-      let nextIndex = index;
+    // Teclado no botão principal
+    trigger.addEventListener("keydown", event => {
 
       if (event.key === "ArrowDown") {
         event.preventDefault();
-        nextIndex = (index + 1) % options.length;
-      }
-
-      else if (event.key === "ArrowUp") {
-        event.preventDefault();
-        nextIndex = (index - 1 + options.length) % options.length;
-      }
-
-      else if (event.key === "Home") {
-        event.preventDefault();
-        nextIndex = 0;
-      }
-
-      else if (event.key === "End") {
-        event.preventDefault();
-        nextIndex = options.length - 1;
-      }
-
-      if (nextIndex !== index) {
-        options[nextIndex].focus();
+        openMenu(true);
       }
 
     });
 
-  });
+    // Fecha com ESC
+    customSelect.addEventListener("keydown", event => {
 
-  // Teclado no botão principal
-  trigger.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
 
-    if (event.key === "ArrowDown") {
-      event.preventDefault();
-      openMenu(true);
-    }
+        event.preventDefault();
+        closeMenu(true);
 
-  });
+      }
 
-  // Fecha com ESC
-  customSelect.addEventListener("keydown", event => {
+    });
 
-    if (event.key === "Escape") {
+    // Fecha quando clicar fora
+    document.addEventListener("click", event => {
 
-      event.preventDefault();
-      closeMenu(true);
+      if (!customSelect.contains(event.target)) {
+        closeMenu();
+      }
 
-    }
+    });
 
-  });
-
-  // Fecha quando clicar fora
-  document.addEventListener("click", event => {
-
-    if (!customSelect.contains(event.target)) {
-      closeMenu();
-    }
-
-  });
-
-}
+  }
 
 
   // =========================================
