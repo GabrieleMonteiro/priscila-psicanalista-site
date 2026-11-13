@@ -1982,8 +1982,9 @@ html[lang="en"] .hero-copy h1 {
   transform: scale(1.15);
 }
 
+
 @media (max-width: 700px) {
-  .hero-image {
-    display: none;
+  .hero-visual {
+    display: none !important;
   }
 }
